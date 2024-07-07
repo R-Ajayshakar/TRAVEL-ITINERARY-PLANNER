@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderPlan Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .logout {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .itinerary {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .itinerary:hover {
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .itinerary h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .itinerary p {
+            margin-bottom: 10px;
+            color: #444;
+        }
+        .itinerary p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logout">
+            <a href="index.html">Logout</a>
+        </div>
+        <h1 class="text-center mb-4">Welcome to WanderPlan!</h1>
+        <h2 class="text-center mb-4">Choose Your Adventure:</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="itinerary">
+                    <h3>Paris</h3>
+                    <p>Activities: Explore the Eiffel Tower, visit the Louvre Museum, take a Seine River cruise.</p>
+                    <p>Transportation: Flight to Paris, local metro and bus passes.</p>
+                    <p>Accommodation: Stay at a boutique hotel in the city center.</p>
+                    <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#bookingModal" data-itinerary="Paris">Book</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="itinerary">
+                    <h3>Lebanon</h3>
+                    <p>Activities: Tour historical sites in Beirut, explore the Cedars of God, relax on the beaches of Tyre.</p>
+                    <p>Transportation: Flight to Beirut, rental car for touring the country.</p>
+                    <p>Accommodation: Stay in a traditional Lebanese guesthouse.</p>
+                    <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#bookingModal" data-itinerary="Lebanon">Book</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="itinerary">
+                    <h3>Tokyo</h3>
+                    <p>Activities: Visit the bustling streets of Shibuya, explore the historic temples of Asakusa, enjoy sushi at Tsukiji Market.</p>
+                    <p>Transportation: Flight to Tokyo, use of subway and JR pass for travel within the city.</p>
+                    <p>Accommodation: Stay in a modern capsule hotel in central Tokyo.</p>
+                    <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#bookingModal" data-itinerary="Tokyo">Book</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="itinerary">
+                    <h3>New York City</h3>
+                    <p>Activities: Visit Times Square, explore Central Park, take a ferry to see the Statue of Liberty.</p>
+                    <p>Transportation: Flight to NYC, use of subway and bus for local travel.</p>
+                    <p>Accommodation: Stay in a trendy boutique hotel in Manhattan.</p>
+                    <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#bookingModal" data-itinerary="New York City">Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Book Your Adventure</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label for="itinerary">Itinerary</label>
+                            <input type="text" class="form-control" id="itinerary" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        $('#bookingModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var itinerary = button.data('itinerary');
+            var modal = $(this);
+            modal.find('.modal-title').text('Book Your Adventure to ' + itinerary);
+            modal.find('#itinerary').val(itinerary);
+        });
+
+        $('#bookingForm').on('submit', function (event) {
+            event.preventDefault();
+            var itinerary = $('#itinerary').val();
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+
+            axios.post('/booking', {
+                name: name,
+                email: email,
+                phone: phone
+            })
+            .then(function (response) {
+                alert('Booking successful!');
+                $('#bookingModal').modal('hide');
+            })
+            .catch(function (error) {
+                console.error('There was an error making the request:', error);
+                alert('Booking failed. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>
